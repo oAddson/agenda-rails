@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contact.firstName %> <%= @contact.lastName %>
+</p>
+
+<%@contact.phones.each do |phone|%>
+
+  <p>
+    <strong><%= phone.category %>: </strong>
+    <%= phone.phoneNumber %>
+  </p>
+
+<% end %>
+
+<p>
+  <strong>Email:</strong>
+  <%= @contact.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @contact.address %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @contact.site %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @contact.description %>
+</p>
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %> |
+<%= link_to 'Delete', @contact, method: :delete, data: { confirm: 'Are you sure?' } %>

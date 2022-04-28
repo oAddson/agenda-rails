@@ -1,0 +1,75 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :firstName %>
+    <%= form.text_field :firstName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastName %>
+    <%= form.text_field :lastName %>
+  </div>
+
+  <% if @contact.persisted? %>
+    <% @contact.phones.each do |phone| %>
+      <div>
+        <div>
+          <%= phone.category%>:
+          <%= phone.phoneNumber%>
+        </div>
+        <div>
+          <%= link_to 'Edit', edit_contact_phone_path(@contact, phone) %>
+          <%= link_to 'Destroy', contact_phone_path(@contact, phone), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    <% end %>
+    <div>
+      <%= link_to 'New Phone', new_contact_phone_path(@contact) %>
+    </div>
+  <% end %>
+  <% unless @contact.persisted? %>
+    <div class="field">
+      <%= form.label :phoneNumber %>
+      <%= form.text_field :phoneNumber %>
+    </div>
+    <div class="field">
+      <%= form.label :category %>
+      <%= form.text_field :category %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :site %>
+    <%= form.text_field :site %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
